@@ -1,10 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.Authenticator" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Base.Theme.CharmRidesAdmin" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:navigationBarColor">@color/black</item>
         <item name="android:statusBarColor">@color/white</item>
         <item name="android:windowLightStatusBar">true</item>
     </style>
 
-    <style name="Theme.Authenticator" parent="Base.Theme.Authenticator" />
+    <style name="Theme.CharmRidesAdmin" parent="Base.Theme.CharmRidesAdmin" />
 </resources>
