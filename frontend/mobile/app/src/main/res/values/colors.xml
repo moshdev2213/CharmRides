@@ -4,4 +4,11 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="primary">#389848</color>
+    <color name="primaryLight">#D7F1DB</color>
+    <color name="bodyBg">#191919</color>
+    <color name="cardBg">#29292A</color>
+
+    <color name="cardBorder">#80EFEFEF</color>
+    <color name="cardBorderText">#7A7A7A</color>
+    <color name="bg_danger">#FF6262</color>
 </resources>

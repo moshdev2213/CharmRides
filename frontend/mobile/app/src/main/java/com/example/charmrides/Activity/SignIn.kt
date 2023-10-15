@@ -1,11 +1,12 @@
-package com.example.charmrides
+package com.example.charmrides.Activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.charmrides.R
 
-class MainActivity : AppCompatActivity() {
+class SignIn : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_sign_in)
     }
 }
