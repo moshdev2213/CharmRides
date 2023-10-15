@@ -39,10 +39,7 @@ public class busController {
     }
 
 
-    @DeleteMapping("/{buid}")
-    public String removeBus(@PathVariable String buid){
-        return bService.deleteBus(buid);
-    }
+
 }
 
 
