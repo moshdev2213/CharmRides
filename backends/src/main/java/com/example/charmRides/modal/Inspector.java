@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collection = "bus")
+@Document(collection = "inspector")
 @JsonInclude(JsonInclude.Include.ALWAYS)
 public class Inspector {
 

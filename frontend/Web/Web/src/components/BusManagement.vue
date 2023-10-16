@@ -29,7 +29,7 @@
   <div className="container-fluid pt-4 pb-0">
     <div class="row">
 
-                      Earnings (Monthly) Card Example
+                      <!-- Earnings (Monthly) Card Example
                       <div class="col-xl-3 col-md-6 mb-4">
                           <div class="card border-left-primary shadow h-100 py-2">
                               <div class="card-body">
@@ -45,10 +45,10 @@
                                   </div>
                               </div>
                           </div>
-                      </div>
+                      </div> -->
 
                       <!-- Earnings (Annual) Card Example -->
-                      <div class="col-xl-3 col-md-6 mb-4">
+                      <!-- <div class="col-xl-3 col-md-6 mb-4">
                           <div class="card border-left-success shadow h-100 py-2">
                               <div class="card-body">
                                   <div class="row no-gutters align-items-center">
@@ -63,10 +63,10 @@
                                   </div>
                               </div>
                           </div>
-                      </div>
+                      </div> -->
 
                       <!-- Tasks Card Example -->
-                      <div class="col-xl-3 col-md-6 mb-4">
+                      <!-- <div class="col-xl-3 col-md-6 mb-4">
                           <div class="card border-left-info shadow h-100 py-2">
                               <div class="card-body">
                                   <div class="row no-gutters align-items-center">
@@ -92,10 +92,10 @@
                                   </div>
                               </div>
                           </div>
-                      </div>
+                      </div> -->
 
                       <!-- Pending Requests Card Example -->
-                      <div class="col-xl-3 col-md-6 mb-4">
+                      <!-- <div class="col-xl-3 col-md-6 mb-4">
                           <div class="card border-left-warning shadow h-100 py-2">
                               <div class="card-body">
                                   <div class="row no-gutters align-items-center">
@@ -110,7 +110,7 @@
                                   </div>
                               </div>
                           </div>
-                      </div>
+                      </div> -->
                   </div>
 
 
@@ -271,6 +271,7 @@
                           <td class="text-xs font-weight-bold p-0 pt-1">
 <button class="btn btn-outline-dark btn-xs p-1 mb-1 me-1" @click="deleteBus(bus.id)">Remove</button>
 <router-link :to="{ name: 'viewB', params: { buid: bus.id } }">
+
 <button class="btn btn-outline-dark btn-xs p-1 mb-1">View</button>
 </router-link>
 
@@ -361,6 +362,7 @@
 import BusService from '../Services/BusService';
 import axios from 'axios';
 import * as XLSX from 'xlsx';
+import Swal from 'sweetalert2';
 
 
 
@@ -383,7 +385,17 @@ methods: {
   },
 
   deleteBus(buid) {
-    // Send a DELETE request to delete the patient using the same PatientService
+
+    Swal.fire({
+  title: 'Are you sure?',
+  text: "You won't be able to revert this!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Yes, delete it!'
+}).then((result) => {
+  if (result.isConfirmed) {
     BusService.deleteBus(buid)
       .then((response) => {
         // Handle success (e.g., show a success message)
@@ -399,6 +411,15 @@ methods: {
         // Handle errors (e.g., show an error message)
         console.error('Error deleting patient:', error);
       });
+    Swal.fire(
+      'Deleted!',
+      'Your file has been deleted.',
+      'success'
+    )
+  }
+})
+    // Send a DELETE request to delete the patient using the same PatientService
+
   },
 
   exportToCSV() {

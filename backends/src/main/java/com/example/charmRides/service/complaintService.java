@@ -13,6 +13,7 @@ public interface complaintService {
     Complaint getComplaintById(String compid);
 
     Complaint updateComplaint(String cid);
+    public Complaint declineComplaint(String cid);
 
     String deleteComplaint(String cid);
 }

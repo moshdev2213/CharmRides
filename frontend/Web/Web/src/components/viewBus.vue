@@ -6,7 +6,7 @@
             <div class="card">
               <div class="card-body">
                 <form @submit.prevent="submitForm">
-                 <h3>Patient Profile</h3>
+                 <h3>Bus Profile</h3>
                  <div class="mb-3">
                     <label for="inputEmail" class="form-label">Name</label>
                     <input type="text" class="form-control" id="inputEmail" v-model="Bus.name" placeholder="Enter Name" />
@@ -53,7 +53,7 @@
                     
                   </div>
   <button type="submit" class="btn btn-primary" style="margin-right: 10px;">Update</button>
-  <button type="button" @click="deletePatient" class="btn btn-primary">Delete</button>
+  <button type="button" @click="deleteBus(Bus.id)" class="btn btn-primary">Delete</button>
 </form>
             </div>
           </div>
@@ -69,6 +69,7 @@
 <script>
 import BusService from '../Services/BusService';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 export default {
   data() {
@@ -89,13 +90,13 @@ export default {
   },
   created() {
     // Fetch patient data initially
-    this.fetchPatientData();
+    this.fetchBusdata();
 
     // Set up polling to fetch data every 5 seconds (adjust the interval as needed)
-    setInterval(this.fetchPatientData, 15000); // Poll every 5 seconds
+    setInterval(this.fetchBusdata, 15000); // Poll every 5 seconds
   },
   methods: {
-    fetchPatientData() {
+    fetchBusdata() {
       const buid = this.$route.params.buid;
 
       // Fetch patient data by patientId from the database using PatientService
@@ -112,6 +113,14 @@ export default {
       // Send the updated patient data to the Spring Boot API using PUT request
       BusService.updateBus(this.Bus)
         .then((response) => {
+
+          Swal.fire({
+  position: 'top-end',
+  icon: 'success',
+  title: 'Your work has been saved',
+  showConfirmButton: false,
+  timer: 1500
+})
           // Handle success (e.g., show a success message)
           console.log('Bus data updated successfully:', response.data);
         })
@@ -121,19 +130,43 @@ export default {
         });
     },
 
-          deleteBus() {
-      // Send a DELETE request to delete the patient using the same PatientService
-      const buid = this.$route.params.buid;
-      BusService.deleteBus(buid)
-        .then((response) => {
-          // Handle success (e.g., show a success message)
-          console.log('Bus deleted successfully:', response.data);
-        })
-        .catch((error) => {
-          // Handle errors (e.g., show an error message)
-          console.error('Error deleting bus:', error);
-        });
-    },
+    deleteBus(buid) {
+
+            Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+            if (result.isConfirmed) {
+            BusService.deleteBus(buid)
+              .then((response) => {
+                // Handle success (e.g., show a success message)
+                console.log('bus deleted successfully:', response.data);
+
+                // After deleting, update the Patiens array by removing the deleted patient
+                this.Buses = this.Buses.filter((bus) => bus.buid !== buid);
+
+                // Navigate to the desired route (if needed)
+                this.$router.push({ name: 'Bman' });
+              })
+              .catch((error) => {
+                // Handle errors (e.g., show an error message)
+                console.error('Error deleting patient:', error);
+              });
+            Swal.fire(
+              'Deleted!',
+              'Your file has been deleted.',
+              'success'
+            )
+            }
+            })
+            // Send a DELETE request to delete the patient using the same PatientService
+
+            },
 
 
 

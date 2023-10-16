@@ -38,6 +38,11 @@ public class busController {
         return bService.updateBus(busreq);
     }
 
+    @DeleteMapping("{buid}")
+    public String deleteBus(@PathVariable String buid){
+        bService.deleteBus(buid);
+        return buid+"deleted";}
+
 
 
 }

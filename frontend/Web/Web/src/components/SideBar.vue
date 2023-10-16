@@ -2,8 +2,8 @@
   <aside className="left-sidebar shadow-sm">
       <div>
         <div className="brand-logo d-flex align-items-center justify-content-between">
-          <h3 className='fw-bolder'>ICare Management</h3> 
-         <img src={logo} alt="" width={150} />
+          <h3 className='fw-bolder'>Charm Rides Management</h3> 
+         <img src="../assets/images/logos/logo.jpg" alt="" width={150} />
         </div>
         <nav className="sidebar-nav scroll-sidebar mt-3" data-simplebar="">
           <ul id="sidebarnav">
@@ -41,7 +41,16 @@
   <span>
     <i class="ti ti-article"></i>
   </span>
-  <span class="hide-menu">Other Management</span>
+  <span class="hide-menu">Inspector Management</span>
+</a>
+</router-link>
+
+<router-link to="/book" class="sidebar-item" aria-expanded="false">
+<a class="sidebar-link">
+  <span>
+    <i class="ti ti-article"></i>
+  </span>
+  <span class="hide-menu">Booking List</span>
 </a>
 </router-link>
 
@@ -61,7 +70,7 @@
                 <span class="hide-menu">My Profile</span>
 </router-link>
 
-<router-link to="/login" class="sidebar-link" aria-expanded="false">
+<router-link to="/" class="sidebar-link" aria-expanded="false">
                 <span>
                   <i className="ti ti-login"></i>
                 </span>

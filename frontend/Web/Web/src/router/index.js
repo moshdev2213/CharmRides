@@ -12,8 +12,10 @@ import registre from '../components/Register.vue'
 //import docPro from '../components/ViewDoctorPro.vue';
 import log from '../components/Login.vue';
 import addbus from '../components/busAdd.vue';
+import addIns from '../components/InsAdd.vue';
 import viewB from '../components/viewBus.vue';
-
+import viewI from '../components/viewInspector.vue';
+import book from '../components/Booking.vue';
 
 
 const routes = [
@@ -21,11 +23,16 @@ const routes = [
   {path: '/',component: log },
   { path: '/Overview',name:'Overview', component: Overview },
   { path: '/BusManagement',name:'Bman', component: Bman },
-  { path: '/OtherManagement', component: other },
+  { path: '/addbus', component: addbus },
+  { path: '/OtherManagement', name:'Other', component: other },
   { path: '/Profile', component: Profile },
   { path: '/registre', component: registre },
-  { path: '/addbus', component: addbus },
-  { path: '/viewB', name:'viewB', component: viewB},
+  { path: '/addIns', component: addIns },
+  { path: '/viewB/:buid', name:'viewB', component: viewB},
+  { path: '/viewI/:Id', name:'viewI', component: viewI},
+  { path: '/book', component: book },
+
+  
   // { path: '/login', component: login },
   // { path: '/Pprofile', component: Pprofile },
   // { path: '/Dprofile', component: Dprofile },

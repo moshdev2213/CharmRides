@@ -38,4 +38,9 @@ public class inspectorController {
         return service.updateInspector(inspector);
     }
 
+    @DeleteMapping("/{Id}")
+    public String removeInspector(@PathVariable String Id){
+        return service.deleteInspector(Id);
+    }
+
 }

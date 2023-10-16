@@ -45,6 +45,11 @@ public class complaintController {
         return cservice.updateComplaint(cid);
     }
 
+    @PutMapping("/decline/{cid}")
+    public Complaint declinecomplaint(@PathVariable String cid){
+        return cservice.declineComplaint(cid);
+    }
+
 
 
 

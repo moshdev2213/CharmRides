@@ -32,7 +32,16 @@ public class complaintServiceImpl implements complaintService {
     public Complaint updateComplaint(String cid) {
         Complaint existcomp = crepo.findById(cid).orElse(null);
         if (existcomp != null) {
-            existcomp.setDescription("Resolved");
+            existcomp.setStatus("Resolved");
+
+        }
+        return crepo.save(existcomp);
+    }
+
+    public Complaint declineComplaint(String cid) {
+        Complaint existcomp = crepo.findById(cid).orElse(null);
+        if (existcomp != null) {
+            existcomp.setStatus("Decline");
 
         }
         return crepo.save(existcomp);
