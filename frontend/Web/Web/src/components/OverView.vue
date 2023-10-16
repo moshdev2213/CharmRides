@@ -1,25 +1,14 @@
-<script>
-import ChartCompo from "./ChartCompo.vue";
-import GraphCompo from "./GraphCompo.vue";
-export default {
-  components: {
-    ChartCompo,
-    GraphCompo,
-  },
-};
-</script>
+
 <template>
   <div className="body-wrapper ">
     <div className="container-fluid pt-4 pb-0">
-      <div className="row">
+      <div className="col">
         <div className="col-lg-8 d-flex align-items-strech">
           <div className="card w-100">
             <div className="card-body">
-              <div
-                className="d-sm-flex d-block align-items-center justify-content-between mb-9"
-              >
+              <div className="d-sm-flex d-block align-items-center justify-content-between mb-9">
                 <div className="mb-3 mb-sm-0">
-                  <h5 className="card-title fw-semibold">Sales Overview</h5>
+                  <h5 className="card-title fw-semibold">Booking Overview</h5>
                 </div>
                 <div>
                   <select className="form-select">
@@ -34,203 +23,59 @@ export default {
             </div>
           </div>
         </div>
-        <div className="col-lg-4">
-          <div className="row">
-            <div className="col-lg-12">
-              <div className="card overflow-hidden">
-                <div className="card-body p-4">
-                  <h5 className="card-title mb-9 fw-semibold">
-                    Yearly Breakup
-                  </h5>
-                  <div className="row align-items-start">
-                    <div className="col-8">
-                      <h4 className="fw-semibold mb-3">$36,358</h4>
-                      <div className="d-flex align-items-center mb-3">
-                        <span
-                          className="me-1 rounded-circle bg-light-success round-20 d-flex align-items-center justify-content-center"
-                        >
-                          <i className=" text-success"></i>
-                        </span>
-                        <p className="text-dark me-1 fs-3 mb-0">+9%</p>
-                        <p className="fs-3 mb-0">last year</p>
-                      </div>
-                      <div className="d-flex align-items-center">
-                        <div className="me-4">
-                          <span
-                            className="round-8 bg-primary rounded-circle me-2 d-inline-block"
-                          ></span>
-                          <span className="fs-2">2023</span>
-                        </div>
-                        <div>
-                          <span
-                            className="round-8 bg-light-primary rounded-circle me-2 d-inline-block"
-                          ></span>
-                          <span className="fs-2">2023</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-4">
-                      <div className="d-flex justify-content-end">
-                        <div
-                          className="text-white bg-secondary rounded-circle p-6 d-flex align-items-center justify-content-center"
-                        >
-                          <i className="ti ti-currency-dollar fs-6"></i>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-12">
-              <div className="card">
-                <div className="card-body">
-                  <div className="row align-items-start">
-                    <div className="col-8">
-                      <h5 className="card-title mb-9 fw-semibold">
-                        Monthly Earnings
-                      </h5>
-                      <h4 className="fw-semibold mb-3">$6,820</h4>
-                      <div className="d-flex align-items-center pb-1">
-                        <span
-                          className="me-2 rounded-circle bg-light-danger round-20 d-flex align-items-center justify-content-center"
-                        >
-                          <i className="ti ti-arrow-down-right text-danger"></i>
-                        </span>
-                        <p className="text-dark me-1 fs-3 mb-0">+9%</p>
-                        <p className="fs-3 mb-0">last year</p>
-                      </div>
-                    </div>
-                    <div className="col-4">
-                      <div className="d-flex justify-content-end">
-                        <div
-                          className="text-white bg-secondary rounded-circle p-6 d-flex align-items-center justify-content-center"
-                        >
-                          <i className="ti ti-currency-dollar fs-6"></i>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <GraphCompo />
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
       <div class="row">
         <div class="col-lg-12 d-flex align-items-stretch">
           <div class="card w-100">
             <div class="card-body p-4">
-              <h5 class="card-title fw-semibold mb-4">Recent Transactions</h5>
+              <h5 class="card-title fw-semibold mb-4">Complaint Details</h5>
               <div class="table-responsive">
-                <table class="table text-nowrap mb-0 align-middle">
-                  <thead class="text-dark fs-4">
+                <table class="table table-flush" id="datatable-basic2">
+                  <thead class="thead-light">
                     <tr>
-                      <th class="border-bottom-0">
-                        <h6 class="fw-semibold mb-0">Id</h6>
-                      </th>
-                      <th class="border-bottom-0">
-                        <h6 class="fw-semibold mb-0">Assigned</h6>
-                      </th>
-                      <th class="border-bottom-0">
-                        <h6 class="fw-semibold mb-0">Name</h6>
-                      </th>
-                      <th class="border-bottom-0">
-                        <h6 class="fw-semibold mb-0">Priority</h6>
-                      </th>
-                      <th class="border-bottom-0">
-                        <h6 class="fw-semibold mb-0">Budget</h6>
-                      </th>
+                      <th>Complain_ID</th>
+                      <th>Username</th>
+
+                      <th>BusName</th>
+                      <th>Inspector_Name</th>
+                      <th>UserName</th>
+                      <th>Status</th>
+                      <th></th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td class="border-bottom-0">
-                        <h6 class="fw-semibold mb-0">1</h6>
-                      </td>
-                      <td class="border-bottom-0">
-                        <h6 class="fw-semibold mb-1">Sunil Joshi</h6>
-                        <span class="fw-normal">Web Designer</span>
-                      </td>
-                      <td class="border-bottom-0">
-                        <p class="mb-0 fw-normal">Elite Admin</p>
-                      </td>
-                      <td class="border-bottom-0">
-                        <div class="d-flex align-items-center gap-2">
-                          <span class="badge bg-primary rounded-3 fw-semibold"
-                            >Low</span
-                          >
+                    <tr v-for="complaint in Complaints" :key="complaint.cid">
+                      <td>
+                        <div class="d-flex align-items-center">
+                          <p class="text-xs font-weight-bold ms-2 mb-0">
+                            {{ complaint.cid }}
+                          </p>
                         </div>
                       </td>
-                      <td class="border-bottom-0">
-                        <h6 class="fw-semibold mb-0 fs-4">$3.9</h6>
+                      <td class="font-weight-bold">
+                        <span class="my-2 text-xs">{{ complaint.userName }}</span>
                       </td>
-                    </tr>
-                    <tr>
-                      <td class="border-bottom-0">
-                        <h6 class="fw-semibold mb-0">2</h6>
+                      <td class="font-weight-bold">
+                        <span class="my-2 text-xs">{{ complaint.busName }}</span>
                       </td>
-                      <td class="border-bottom-0">
-                        <h6 class="fw-semibold mb-1">Andrew McDownland</h6>
-                        <span class="fw-normal">Project Manager</span>
+                      <td class="font-weight-bold">
+                        <span class="my-2 text-xs">{{ complaint.inspector }}</span>
                       </td>
-                      <td class="border-bottom-0">
-                        <p class="mb-0 fw-normal">Real Homes WP Theme</p>
+                      <td class="text-xs font-weight-bold">
+                        <span class="my-2 text-xs">{{ complaint.description }}</span>
                       </td>
-                      <td class="border-bottom-0">
-                        <div class="d-flex align-items-center gap-2">
-                          <span class="badge bg-secondary rounded-3 fw-semibold"
-                            >Medium</span
-                          >
-                        </div>
+                      <td class="text-xs font-weight-bold">
+                        <span class="my-2 text-xs">{{
+                          complaint.status
+                        }}</span>
                       </td>
-                      <td class="border-bottom-0">
-                        <h6 class="fw-semibold mb-0 fs-4">$24.5k</h6>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="border-bottom-0">
-                        <h6 class="fw-semibold mb-0">3</h6>
-                      </td>
-                      <td class="border-bottom-0">
-                        <h6 class="fw-semibold mb-1">Christopher Jamil</h6>
-                        <span class="fw-normal">Project Manager</span>
-                      </td>
-                      <td class="border-bottom-0">
-                        <p class="mb-0 fw-normal">MedicalPro WP Theme</p>
-                      </td>
-                      <td class="border-bottom-0">
-                        <div class="d-flex align-items-center gap-2">
-                          <span class="badge bg-danger rounded-3 fw-semibold"
-                            >High</span
-                          >
-                        </div>
-                      </td>
-                      <td class="border-bottom-0">
-                        <h6 class="fw-semibold mb-0 fs-4">$12.8k</h6>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="border-bottom-0">
-                        <h6 class="fw-semibold mb-0">4</h6>
-                      </td>
-                      <td class="border-bottom-0">
-                        <h6 class="fw-semibold mb-1">Nirav Joshi</h6>
-                        <span class="fw-normal">Frontend Engineer</span>
-                      </td>
-                      <td class="border-bottom-0">
-                        <p class="mb-0 fw-normal">Hosting Press HTML</p>
-                      </td>
-                      <td class="border-bottom-0">
-                        <div class="d-flex align-items-center gap-2">
-                          <span class="badge bg-success rounded-3 fw-semibold"
-                            >Critical</span
-                          >
-                        </div>
-                      </td>
-                      <td class="border-bottom-0">
-                        <h6 class="fw-semibold mb-0 fs-4">$2.4k</h6>
+                      <td class="text-xs font-weight-bold p-0 pt-1">
+                        <button class="btn btn-outline-dark btn-xs p-1 mb-1 me-1" @click="Updatetoresolve(complaint.cid)">
+                          Resolved
+                        </button>
+                        <button class="btn btn-outline-dark btn-xs p-1 mb-1 me-1" @click="Updatetodecline(complaint.cid)">
+                          Decline
+                        </button>
                       </td>
                     </tr>
                   </tbody>
@@ -243,3 +88,128 @@ export default {
     </div>
   </div>
 </template>
+
+<script>
+import ComplaintService from "../services/ComplaintService";
+import axios from "axios";
+import * as XLSX from "xlsx";
+import Swal from "sweetalert2";
+import ChartCompo from "./ChartCompo.vue";
+import GraphCompo from "./GraphCompo.vue";
+
+export default {
+  name: "Complaintlist",
+  components: {
+    ChartCompo,
+    GraphCompo,
+  },
+
+  data() {
+    return {
+      Complaints: [],
+    };
+  },
+
+  methods: {
+    getComplaints() {
+      ComplaintService.getComplaints().then((response) => {
+        this.Complaints = response.data;
+      });
+    },
+
+
+    Updatetoresolve(cid) {
+
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, update it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          ComplaintService.Updatetoresolve(cid)
+            .then((response) => {
+              // Handle success (e.g., show a success message)
+              // console.log('bus deleted successfully:', response.data);
+
+              // After deleting, update the Patiens array by removing the deleted patient
+              this.Complaints = this.Complaints.filter((Complaint) => Complaint.cid !== cid);
+
+              // Navigate to the desired route (if needed)
+              this.$router.push({ name: 'Overview' });
+            })
+            .catch((error) => {
+              // Handle errors (e.g., show an error message)
+              console.error('Error updating Inspector:', error);
+            });
+          Swal.fire(
+            'Updated!',
+            'Your file has been updated.',
+            'success'
+          )
+        }
+      })
+      // Send a DELETE request to delete the patient using the same PatientService
+
+    },
+
+    Updatetodecline(cid) {
+
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, update it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          ComplaintService.Updatetodecline(cid)
+            .then((response) => {
+              // Handle success (e.g., show a success message)
+              // console.log('bus deleted successfully:', response.data);
+
+              // After deleting, update the Patiens array by removing the deleted patient
+              this.Complaints = this.Complaints.filter((Complaint) => Complaint.cid !== cid);
+
+              // Navigate to the desired route (if needed)
+              this.$router.push({ name: 'Overview' });
+            })
+            .catch((error) => {
+              // Handle errors (e.g., show an error message)
+              console.error('Error updating Inspector:', error);
+            });
+          Swal.fire(
+            'Updated!',
+            'Your file has been updated.',
+            'success'
+          )
+        }
+      })
+      // Send a DELETE request to delete the patient using the same PatientService
+
+    },
+
+
+
+    exportToCSV() {
+      const Complaints = this.Complaints;
+      const ws = XLSX.utils.json_to_sheet(Complaints);
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, "Complaints");
+      XLSX.writeFile(wb, "Complaints.csv");
+    },
+  },
+
+  created() {
+    this.getComplaints();
+    setInterval(this.getComplaints, 1000);
+  },
+};
+</script>
+
+
