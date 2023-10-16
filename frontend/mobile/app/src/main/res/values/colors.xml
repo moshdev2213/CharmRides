@@ -11,4 +11,6 @@
     <color name="cardBorder">#80EFEFEF</color>
     <color name="cardBorderText">#7A7A7A</color>
     <color name="bg_danger">#FF6262</color>
+
+    <color name="material_outline">#DEDEDE</color>
 </resources>

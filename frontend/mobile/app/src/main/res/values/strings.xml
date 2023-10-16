@@ -2,4 +2,23 @@
     <string name="app_name">CharmRides</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="gender">
+        <item>Male</item>
+        <item>FeMale</item>
+    </string-array>
+
+    <string-array name="seats">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+    <string-array name="shedu">
+        <item>morning</item>
+        <item>evening</item>
+        <item>afternoon</item>
+        <item>night</item>
+    </string-array>
 </resources>
