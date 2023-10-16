@@ -13,6 +13,9 @@
         android:theme="@style/Theme.CharmRides"
         tools:targetApi="31">
         <activity
+            android:name=".Activity.Payment"
+            android:exported="false" />
+        <activity
             android:name=".Activity.Checkout"
             android:exported="false" />
         <activity
