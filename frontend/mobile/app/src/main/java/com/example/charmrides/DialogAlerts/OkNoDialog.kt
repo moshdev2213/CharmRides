@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.view.Window
 import android.widget.Button
 import android.widget.TextView
-import com.example.fitme.R
+import com.example.charmrides.R
 
 class OkNoDialog(
     private val context: Context
