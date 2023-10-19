@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
-import com.example.charmrides.EntityDao.UserRecord
+import com.example.charmrides.EntityRes.UserRecord
 import com.example.charmrides.Fragment.BookingFragment
 import com.example.charmrides.Fragment.BusFragment
 import com.example.charmrides.Fragment.IndexFragment

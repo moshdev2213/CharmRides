@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.cardview.widget.CardView
 import com.example.charmrides.ApiService.AuthService
 import com.example.charmrides.Entity.AuthPassEmail
-import com.example.charmrides.EntityDao.UserRecord
+import com.example.charmrides.EntityRes.UserRecord
 import com.example.charmrides.FormData.UserLoginForm
 import com.example.charmrides.R
 import com.example.charmrides.RetrofitService.RetrofitService
