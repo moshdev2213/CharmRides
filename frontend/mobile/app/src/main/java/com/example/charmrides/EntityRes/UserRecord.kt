@@ -1,4 +1,4 @@
-package com.example.charmrides.EntityDao
+package com.example.charmrides.EntityRes
 
 import java.io.Serializable
 
