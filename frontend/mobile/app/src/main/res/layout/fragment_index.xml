@@ -73,7 +73,7 @@
                     app:cardElevation="1dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/materialCardView"
+                    app:layout_constraintStart_toEndOf="@+id/cvBtnQrScanIndex"
                     app:layout_constraintTop_toBottomOf="@+id/imageView6">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -109,7 +109,7 @@
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/materialCardView"
+                    android:id="@+id/cvBtnQrScanIndex"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -164,7 +164,7 @@
                     android:clickable="true"
                     app:cardCornerRadius="10dp"
                     app:cardElevation="1dp"
-                    app:layout_constraintEnd_toStartOf="@+id/materialCardView"
+                    app:layout_constraintEnd_toStartOf="@+id/cvBtnQrScanIndex"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintHorizontal_chainStyle="spread_inside"
                     app:layout_constraintStart_toStartOf="parent"
@@ -317,7 +317,7 @@
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/materialCardView" />
+                    app:layout_constraintTop_toBottomOf="@+id/cvBtnQrScanIndex" />
 
                 <TextView
                     android:id="@+id/textView10"
