@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/booking")
-@CrossOrigin("http://localhost:5173") // Removed trailing slash
+@CrossOrigin("*") // Removed trailing slash
 public class bookingController {
 
     @Autowired
