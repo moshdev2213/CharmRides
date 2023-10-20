@@ -5,6 +5,7 @@ import com.example.charmridesadmin.EntityRes.ComplainItem
 import com.example.charmridesadmin.FormData.ComplainForm
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface ComplainService {
@@ -12,4 +13,9 @@ interface ComplainService {
     fun createNewReport(
         @Body complainItem: ComplainItem
     ):Call<ComplainItem>
+
+    @GET("/api/collections/complaint/records")
+    fun getAllComplains(
+
+    ):Call<ComplainFormRes>
 }
