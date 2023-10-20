@@ -88,7 +88,7 @@
 
                       <th>BusName</th>
                       <th>Inspector_Name</th>
-                      <th>UserName</th>
+                      <th>Description</th>
                       <th>Status</th>
                       <th></th>
                     </tr>
