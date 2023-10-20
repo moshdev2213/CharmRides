@@ -1,60 +1,84 @@
 package com.example.charmrides.Fragment
 
+import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.annotation.RequiresApi
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.charmrides.Adapter.PayAdapter
+import com.example.charmrides.ApiService.BusServices
+import com.example.charmrides.EntityRes.BusRes
+import com.example.charmrides.EntityRes.PayRes
+import com.example.charmrides.EntityRes.PaymentItem
+import com.example.charmrides.EntityRes.UserRecord
 import com.example.charmrides.R
+import com.example.charmrides.RetrofitService.RetrofitService
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [BookingFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class BookingFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var rvReportFrag: RecyclerView
+    private lateinit var payAdapter: PayAdapter
+    private lateinit var out: UserRecord
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
 
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_booking, container, false)
+        val view =  inflater.inflate(R.layout.fragment_booking, container, false)
+
+        out = arguments?.getSerializable("user", UserRecord::class.java)!!
+        initRecycler(view)
+        return view
+    }
+    private fun initRecycler(view:View){
+        rvReportFrag = view.findViewById(R.id.rvReservationFrag)
+        rvReportFrag.layoutManager= LinearLayoutManager(requireActivity())
+        payAdapter = PayAdapter ({
+                payItem: PaymentItem -> payCardClicked(payItem)
+        },requireContext() )
+        rvReportFrag.adapter = payAdapter
+        fetchDetails()
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment BookingFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            BookingFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    private fun fetchDetails() {
+        val emailToFilter: String = out.record.email
+        val filterValue = "(userEmail=\"$emailToFilter\")"
+
+        val retrofitService= RetrofitService()
+        val getList =retrofitService.getRetrofit().create(BusServices::class.java)
+        val call: Call<PayRes> = getList.getAllPay(filterValue)
+
+        call.enqueue(object : Callback<PayRes> {
+            override fun onResponse(call: Call<PayRes>, response: Response<PayRes>) {
+                if(response.isSuccessful){
+                    if (response.body()!=null){
+                        val mealRes = response.body()
+                        val mealItem = mealRes?.items
+                        payAdapter.setList(mealItem!!)
+                    }
+                }else{
+                    Toast.makeText(requireContext(),"Invalid response", Toast.LENGTH_SHORT).show()
                 }
             }
+            override fun onFailure(call: Call<PayRes>, t: Throwable) {
+                Toast.makeText(requireContext(),"Server Error", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
+
+    private fun payCardClicked(payItem: PaymentItem) {
+        Toast.makeText(requireContext(),payItem.busName.capitalize(),Toast.LENGTH_SHORT).show()
+    }
+
 }

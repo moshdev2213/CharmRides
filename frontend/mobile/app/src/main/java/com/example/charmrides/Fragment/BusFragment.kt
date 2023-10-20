@@ -1,60 +1,89 @@
 package com.example.charmrides.Fragment
 
+import android.content.Intent
+import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.annotation.RequiresApi
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.charmrides.Activity.BusDetails
+import com.example.charmrides.Adapter.BusAdapter
+import com.example.charmrides.ApiService.BusServices
+import com.example.charmrides.EntityRes.BusItem
+import com.example.charmrides.EntityRes.BusRes
+import com.example.charmrides.EntityRes.UserRecord
 import com.example.charmrides.R
+import com.example.charmrides.RetrofitService.RetrofitService
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [BusFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class BusFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var rvReportFrag: RecyclerView
+    private lateinit var busAdapter: BusAdapter
+    private lateinit var out: UserRecord
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_bus, container, false)
+        var view = inflater.inflate(R.layout.fragment_bus, container, false)
+
+        out = arguments?.getSerializable("user", UserRecord::class.java)!!
+
+        initRecycler(view)
+
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment BusFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            BusFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    private fun initRecycler(view:View){
+        rvReportFrag = view.findViewById(R.id.rvBusFrag)
+        rvReportFrag.layoutManager= LinearLayoutManager(requireActivity())
+        busAdapter = BusAdapter ({
+                busItem: BusItem -> busCardClicked(busItem)
+        },requireContext() )
+        rvReportFrag.adapter = busAdapter
+        fetchDetails()
+    }
+
+    private fun busCardClicked(busItem: BusItem) {
+        val bundle = Bundle()
+        bundle.putSerializable("user", out)
+        bundle.putSerializable("bus", busItem)
+
+        val intent = Intent(requireActivity(), BusDetails::class.java)
+        intent.putExtras(bundle)
+        startActivity(intent)
+    }
+    private fun fetchDetails() {
+        val retrofitService= RetrofitService()
+        val getList =retrofitService.getRetrofit().create(BusServices::class.java)
+        val call: Call<BusRes> = getList.getAlBuses()
+
+        call.enqueue(object : Callback<BusRes> {
+            override fun onResponse(call: Call<BusRes>, response: Response<BusRes>) {
+                if(response.isSuccessful){
+                    if (response.body()!=null){
+                        val mealRes = response.body()
+                        val mealItem = mealRes?.items
+                        busAdapter.setList(mealItem!!)
+                    }
+                }else{
+                    Toast.makeText(requireContext(),"Invalid response", Toast.LENGTH_SHORT).show()
                 }
             }
+            override fun onFailure(call: Call<BusRes>, t: Throwable) {
+                Toast.makeText(requireContext(),"Server Error", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
+
+
 }
