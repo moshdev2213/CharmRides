@@ -12,7 +12,7 @@ data class TripItem(
     val destination: String,
     val distance: Int,
     val endCors: String,
-    val fare: Int,
+    val fare: Double,
     val id: String,
     val origin: String,
     val startCors: String,

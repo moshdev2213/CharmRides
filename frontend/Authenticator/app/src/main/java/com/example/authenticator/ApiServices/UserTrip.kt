@@ -12,7 +12,7 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface UserTrip {
-    @GET("/api/collections/users/records")
+    @GET("/api/collections/trip/records")
     fun getUserLastTrip(
         @Query("filter") filter:String,
         @Query("sort") sort:String = "-created" ,

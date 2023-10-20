@@ -48,7 +48,7 @@ dependencies {
 
     //scanner
     implementation 'com.github.yuriy-budiyev:code-scanner:2.3.2'
-    //splash screen ependency
+    //splash screen dependency
     implementation 'androidx.core:core-splashscreen:1.0.0'
     //retrofit dependency and GSON library
     implementation 'com.squareup.retrofit2:retrofit:(insert latest version)'
