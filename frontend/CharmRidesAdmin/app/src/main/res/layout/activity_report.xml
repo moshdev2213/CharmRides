@@ -224,7 +224,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout5"
                 app:prefixText="+94"
-                app:startIconDrawable="@drawable/baseline_local_phone_24">
+                app:startIconDrawable="@drawable/baseline_phone_24">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
