@@ -1,11 +1,16 @@
 package com.example.authenticator.Activity
 
+import android.Manifest
+import android.R.attr.country
 import android.content.pm.PackageManager
+import android.location.Address
+import android.location.Geocoder
 import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.widget.Toast
+import androidx.annotation.NonNull
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.core.app.ActivityCompat
@@ -14,7 +19,6 @@ import com.budiyev.android.codescanner.CodeScanner
 import com.budiyev.android.codescanner.CodeScannerView
 import com.budiyev.android.codescanner.DecodeCallback
 import com.example.authenticator.ApiRes.Route
-import com.example.authenticator.ApiRes.RouteInfo
 import com.example.authenticator.ApiServices.AuthPb
 import com.example.authenticator.ApiServices.GmapsCalculator
 import com.example.authenticator.ApiServices.UserTrip
@@ -24,9 +28,13 @@ import com.example.authenticator.EntityRes.UserExist
 import com.example.authenticator.R
 import com.example.authenticator.RetrofitService.PbService
 import com.example.authenticator.RetrofitService.RetrofitService
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.IOException
+import java.util.Locale
 
 
 class MainActivity : AppCompatActivity() {
@@ -35,14 +43,22 @@ class MainActivity : AppCompatActivity() {
     private lateinit var cvProceedToExit:CardView
     private lateinit var mediaPlayerSuccess:MediaPlayer
     private lateinit var mediaPlayerFailed:MediaPlayer
+    private lateinit var fusedLocationProviderClient:FusedLocationProviderClient
     private var isProcessing = false
     private val handler = Handler()
 
+    private val REQUEST_CODE = 100
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        askPermissionForCamera()
+        askPermissionForLocation()
+
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+
         scannerQrFrame = findViewById(R.id.scannerQrFrame)
         cvProceedToExit = findViewById(R.id.cvProceedToExit)
         scannerQr = CodeScanner(this,scannerQrFrame)
@@ -65,9 +81,9 @@ class MainActivity : AppCompatActivity() {
         cvProceedToExit.setOnClickListener {
             finish()
         }
-        askPermissionForCamera()
-//        getDirection()
 
+//        getDirection()
+        getLastLocation()
         getTripFare { route ->
             if (route != null) {
                 // Handle successful response
@@ -80,6 +96,55 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    private fun getLastLocation() {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            fusedLocationProviderClient.lastLocation
+                .addOnSuccessListener { location ->
+                    if (location != null) {
+                        try {
+                            val geocoder = Geocoder(this@MainActivity, Locale.getDefault())
+                            val addresses: List<Address>? =
+                                geocoder.getFromLocation(location.latitude, location.longitude, 1)
+                            println("Lattitude: " + addresses!![0].latitude)
+
+                        } catch (e: IOException) {
+                            e.printStackTrace()
+                        }
+                    }
+                }
+        } else {
+            askPermission()
+        }
+    }
+    private fun askPermission() {
+        ActivityCompat.requestPermissions(
+            this@MainActivity,
+            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+            REQUEST_CODE
+        )
+    }
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        @NonNull permissions: Array<String?>,
+        @NonNull grantResults: IntArray
+    ) {
+        if (requestCode == REQUEST_CODE) {
+            if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                getLastLocation()
+            } else {
+                Toast.makeText(
+                    this@MainActivity,
+                    "Please provide the required permission",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    }
 
     private fun getAuthEmail(email:String){
         val pbService = PbService()
@@ -265,6 +330,13 @@ class MainActivity : AppCompatActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.CAMERA), 101)
+            }
+        }
+    }
+    private fun askPermissionForLocation() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), 102)
             }
         }
     }
