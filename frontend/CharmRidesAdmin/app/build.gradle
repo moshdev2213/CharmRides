@@ -6,7 +6,10 @@ plugins {
 android {
     namespace 'com.example.charmridesadmin'
     compileSdk 33
-
+    packagingOptions {
+        exclude 'META-INF/androidx.cardview_cardview.version'
+        // Add more exclude statements if needed
+    }
     defaultConfig {
         applicationId "com.example.charmridesadmin"
         minSdk 24

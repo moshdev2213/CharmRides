@@ -62,7 +62,7 @@
                 android:layout_height="match_parent">
 
                 <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/materialCardView"
+                    android:id="@+id/cvScanUserToken"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -117,7 +117,7 @@
                     android:clickable="true"
                     app:cardCornerRadius="10dp"
                     app:cardElevation="1dp"
-                    app:layout_constraintEnd_toStartOf="@+id/materialCardView"
+                    app:layout_constraintEnd_toStartOf="@+id/cvScanUserToken"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintHorizontal_chainStyle="spread_inside"
                     app:layout_constraintStart_toStartOf="parent"
@@ -253,7 +253,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="24dp"
                     android:fontFamily="@font/montserrat_bold"
-                    android:text="TryOut Our\nNew reservation  \nTools For Quick\nBookings"
+                    android:text="TryOut Our\nNew Complains  \nTools For Quick\nInquieries"
                     android:textAlignment="textStart"
                     android:textColor="@color/white"
                     android:textSize="24sp"
@@ -271,7 +271,7 @@
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/materialCardView" />
+                    app:layout_constraintTop_toBottomOf="@+id/cvScanUserToken" />
 
                 <TextView
                     android:id="@+id/textView10"
