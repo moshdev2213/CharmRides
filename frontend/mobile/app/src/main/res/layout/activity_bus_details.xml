@@ -69,6 +69,7 @@
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/dropdown_background_outline"
                 android:entries="@array/shedu"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@+id/spinnerSeatSelect"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/spinnerSeatSelect"
@@ -76,14 +77,14 @@
 
             <Spinner
                 android:id="@+id/spinnerSeatSelect"
-                android:layout_width="100dp"
+                android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="16dp"
                 android:background="@drawable/dropdown_background_outline"
                 android:entries="@array/seats"
-                app:layout_constraintEnd_toStartOf="@+id/spinnerSheduSelect"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardView12" />
 
@@ -362,7 +363,7 @@
                                 android:layout_marginStart="16dp"
                                 android:layout_marginEnd="16dp"
                                 android:fontFamily="@font/montserrat_medium"
-                                android:text="7 - 8 Am ⏰"
+                                android:text="Anyime ⏰"
                                 android:textColor="@color/black"
                                 android:textSize="14sp"
                                 app:layout_constraintBottom_toBottomOf="parent"
@@ -475,7 +476,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/montserrat_bold"
-        android:text="Train Details"
+        android:text="Bus Details"
         android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
