@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.Authenticator" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:navigationBarColor">@color/black</item>
-        <item name="android:statusBarColor">@color/white</item>
+        <item name="android:statusBarColor">@color/primaryLight</item>
         <item name="android:windowLightStatusBar">true</item>
     </style>
 
