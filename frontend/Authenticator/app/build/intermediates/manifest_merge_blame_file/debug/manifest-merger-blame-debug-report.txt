@@ -1,0 +1,136 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.authenticator"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="24"
+8-->C:\csse\project-CSSE\CharmRides\frontend\Authenticator\app\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="33" />
+9-->C:\csse\project-CSSE\CharmRides\frontend\Authenticator\app\src\main\AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.CAMERA" />
+11-->C:\csse\project-CSSE\CharmRides\frontend\Authenticator\app\src\main\AndroidManifest.xml:5:5-64
+11-->C:\csse\project-CSSE\CharmRides\frontend\Authenticator\app\src\main\AndroidManifest.xml:5:22-62
+12    <uses-permission android:name="android.permission.INTERNET" />
+12-->C:\csse\project-CSSE\CharmRides\frontend\Authenticator\app\src\main\AndroidManifest.xml:6:5-67
+12-->C:\csse\project-CSSE\CharmRides\frontend\Authenticator\app\src\main\AndroidManifest.xml:6:22-64
+13    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+13-->C:\csse\project-CSSE\CharmRides\frontend\Authenticator\app\src\main\AndroidManifest.xml:7:5-79
+13-->C:\csse\project-CSSE\CharmRides\frontend\Authenticator\app\src\main\AndroidManifest.xml:7:22-76
+14    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+14-->C:\csse\project-CSSE\CharmRides\frontend\Authenticator\app\src\main\AndroidManifest.xml:8:5-79
+14-->C:\csse\project-CSSE\CharmRides\frontend\Authenticator\app\src\main\AndroidManifest.xml:8:22-76
+15    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+15-->C:\csse\project-CSSE\CharmRides\frontend\Authenticator\app\src\main\AndroidManifest.xml:9:5-80
+15-->C:\csse\project-CSSE\CharmRides\frontend\Authenticator\app\src\main\AndroidManifest.xml:9:22-78
+16
+17    <uses-feature
+17-->C:\csse\project-CSSE\CharmRides\frontend\Authenticator\app\src\main\AndroidManifest.xml:11:5-13:35
+18        android:name="android.hardware.camera"
+18-->C:\csse\project-CSSE\CharmRides\frontend\Authenticator\app\src\main\AndroidManifest.xml:12:9-47
+19        android:required="false" />
+19-->C:\csse\project-CSSE\CharmRides\frontend\Authenticator\app\src\main\AndroidManifest.xml:13:9-33
+20
+21    <permission
+21-->[androidx.core:core:1.9.0] C:\Users\Dell\.gradle\caches\transforms-3\256c6597bc3e6f8192abd6f9b27a26ab\transformed\core-1.9.0\AndroidManifest.xml:22:5-24:47
+22        android:name="com.example.authenticator.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+22-->[androidx.core:core:1.9.0] C:\Users\Dell\.gradle\caches\transforms-3\256c6597bc3e6f8192abd6f9b27a26ab\transformed\core-1.9.0\AndroidManifest.xml:23:9-81
+23        android:protectionLevel="signature" />
+23-->[androidx.core:core:1.9.0] C:\Users\Dell\.gradle\caches\transforms-3\256c6597bc3e6f8192abd6f9b27a26ab\transformed\core-1.9.0\AndroidManifest.xml:24:9-44
+24
+25    <uses-permission android:name="com.example.authenticator.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+25-->[androidx.core:core:1.9.0] C:\Users\Dell\.gradle\caches\transforms-3\256c6597bc3e6f8192abd6f9b27a26ab\transformed\core-1.9.0\AndroidManifest.xml:26:5-97
+25-->[androidx.core:core:1.9.0] C:\Users\Dell\.gradle\caches\transforms-3\256c6597bc3e6f8192abd6f9b27a26ab\transformed\core-1.9.0\AndroidManifest.xml:26:22-94
+26
+27    <application
+27-->C:\csse\project-CSSE\CharmRides\frontend\Authenticator\app\src\main\AndroidManifest.xml:14:5-37:19
+28        android:allowBackup="true"
+28-->C:\csse\project-CSSE\CharmRides\frontend\Authenticator\app\src\main\AndroidManifest.xml:15:9-35
+29        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+29-->[androidx.core:core:1.9.0] C:\Users\Dell\.gradle\caches\transforms-3\256c6597bc3e6f8192abd6f9b27a26ab\transformed\core-1.9.0\AndroidManifest.xml:28:18-86
+30        android:dataExtractionRules="@xml/data_extraction_rules"
+30-->C:\csse\project-CSSE\CharmRides\frontend\Authenticator\app\src\main\AndroidManifest.xml:16:9-65
+31        android:debuggable="true"
+32        android:extractNativeLibs="false"
+33        android:fullBackupContent="@xml/backup_rules"
+33-->C:\csse\project-CSSE\CharmRides\frontend\Authenticator\app\src\main\AndroidManifest.xml:17:9-54
+34        android:icon="@mipmap/ic_launcher"
+34-->C:\csse\project-CSSE\CharmRides\frontend\Authenticator\app\src\main\AndroidManifest.xml:18:9-43
+35        android:label="@string/app_name"
+35-->C:\csse\project-CSSE\CharmRides\frontend\Authenticator\app\src\main\AndroidManifest.xml:19:9-41
+36        android:roundIcon="@mipmap/ic_launcher_round"
+36-->C:\csse\project-CSSE\CharmRides\frontend\Authenticator\app\src\main\AndroidManifest.xml:20:9-54
+37        android:supportsRtl="true"
+37-->C:\csse\project-CSSE\CharmRides\frontend\Authenticator\app\src\main\AndroidManifest.xml:21:9-35
+38        android:testOnly="true"
+39        android:theme="@style/Theme.Authenticator"
+39-->C:\csse\project-CSSE\CharmRides\frontend\Authenticator\app\src\main\AndroidManifest.xml:23:9-51
+40        android:usesCleartextTraffic="true" >
+40-->C:\csse\project-CSSE\CharmRides\frontend\Authenticator\app\src\main\AndroidManifest.xml:22:9-44
+41        <activity
+41-->C:\csse\project-CSSE\CharmRides\frontend\Authenticator\app\src\main\AndroidManifest.xml:25:9-33:20
+42            android:name="com.example.authenticator.Activity.MainActivity"
+42-->C:\csse\project-CSSE\CharmRides\frontend\Authenticator\app\src\main\AndroidManifest.xml:26:13-50
+43            android:exported="true" >
+43-->C:\csse\project-CSSE\CharmRides\frontend\Authenticator\app\src\main\AndroidManifest.xml:27:13-36
+44            <intent-filter>
+44-->C:\csse\project-CSSE\CharmRides\frontend\Authenticator\app\src\main\AndroidManifest.xml:28:13-32:29
+45                <action android:name="android.intent.action.MAIN" />
+45-->C:\csse\project-CSSE\CharmRides\frontend\Authenticator\app\src\main\AndroidManifest.xml:29:17-69
+45-->C:\csse\project-CSSE\CharmRides\frontend\Authenticator\app\src\main\AndroidManifest.xml:29:25-66
+46
+47                <category android:name="android.intent.category.LAUNCHER" />
+47-->C:\csse\project-CSSE\CharmRides\frontend\Authenticator\app\src\main\AndroidManifest.xml:31:17-77
+47-->C:\csse\project-CSSE\CharmRides\frontend\Authenticator\app\src\main\AndroidManifest.xml:31:27-74
+48            </intent-filter>
+49        </activity>
+50
+51        <meta-data
+51-->C:\csse\project-CSSE\CharmRides\frontend\Authenticator\app\src\main\AndroidManifest.xml:34:9-36:57
+52            android:name="preloaded_fonts"
+52-->C:\csse\project-CSSE\CharmRides\frontend\Authenticator\app\src\main\AndroidManifest.xml:35:13-43
+53            android:resource="@array/preloaded_fonts" />
+53-->C:\csse\project-CSSE\CharmRides\frontend\Authenticator\app\src\main\AndroidManifest.xml:36:13-54
+54
+55        <activity
+55-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\Dell\.gradle\caches\transforms-3\4e7627831251ec1fa499f7b70e175aff\transformed\play-services-base-18.0.1\AndroidManifest.xml:20:9-22:45
+56            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+56-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\Dell\.gradle\caches\transforms-3\4e7627831251ec1fa499f7b70e175aff\transformed\play-services-base-18.0.1\AndroidManifest.xml:20:19-85
+57            android:exported="false"
+57-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\Dell\.gradle\caches\transforms-3\4e7627831251ec1fa499f7b70e175aff\transformed\play-services-base-18.0.1\AndroidManifest.xml:22:19-43
+58            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+58-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\Dell\.gradle\caches\transforms-3\4e7627831251ec1fa499f7b70e175aff\transformed\play-services-base-18.0.1\AndroidManifest.xml:21:19-78
+59
+60        <meta-data
+60-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\Dell\.gradle\caches\transforms-3\9bcb60557a38ced9cd58de41b48ed34f\transformed\play-services-basement-18.1.0\AndroidManifest.xml:21:9-23:69
+61            android:name="com.google.android.gms.version"
+61-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\Dell\.gradle\caches\transforms-3\9bcb60557a38ced9cd58de41b48ed34f\transformed\play-services-basement-18.1.0\AndroidManifest.xml:22:13-58
+62            android:value="@integer/google_play_services_version" />
+62-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\Dell\.gradle\caches\transforms-3\9bcb60557a38ced9cd58de41b48ed34f\transformed\play-services-basement-18.1.0\AndroidManifest.xml:23:13-66
+63
+64        <provider
+64-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Dell\.gradle\caches\transforms-3\ed5c533cc70e7b3b025c1d493dfcade0\transformed\emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
+65            android:name="androidx.startup.InitializationProvider"
+65-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Dell\.gradle\caches\transforms-3\ed5c533cc70e7b3b025c1d493dfcade0\transformed\emoji2-1.2.0\AndroidManifest.xml:25:13-67
+66            android:authorities="com.example.authenticator.androidx-startup"
+66-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Dell\.gradle\caches\transforms-3\ed5c533cc70e7b3b025c1d493dfcade0\transformed\emoji2-1.2.0\AndroidManifest.xml:26:13-68
+67            android:exported="false" >
+67-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Dell\.gradle\caches\transforms-3\ed5c533cc70e7b3b025c1d493dfcade0\transformed\emoji2-1.2.0\AndroidManifest.xml:27:13-37
+68            <meta-data
+68-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Dell\.gradle\caches\transforms-3\ed5c533cc70e7b3b025c1d493dfcade0\transformed\emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
+69                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+69-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Dell\.gradle\caches\transforms-3\ed5c533cc70e7b3b025c1d493dfcade0\transformed\emoji2-1.2.0\AndroidManifest.xml:30:17-75
+70                android:value="androidx.startup" />
+70-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Dell\.gradle\caches\transforms-3\ed5c533cc70e7b3b025c1d493dfcade0\transformed\emoji2-1.2.0\AndroidManifest.xml:31:17-49
+71            <meta-data
+71-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\Dell\.gradle\caches\transforms-3\41ce1ad912a5e3041715fcd6269c5d09\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:31:13-33:52
+72                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+72-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\Dell\.gradle\caches\transforms-3\41ce1ad912a5e3041715fcd6269c5d09\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:32:17-78
+73                android:value="androidx.startup" />
+73-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\Dell\.gradle\caches\transforms-3\41ce1ad912a5e3041715fcd6269c5d09\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:33:17-49
+74        </provider>
+75    </application>
+76
+77</manifest>
