@@ -10,7 +10,7 @@
     <!--        android:icon="@drawable/baseline_personal_injury_24"/>-->
     <item
         android:title="Report"
-        android:id="@+id/trains"
+        android:id="@+id/report"
         android:icon="@drawable/baseline_newspaper_24"/>
 
 
