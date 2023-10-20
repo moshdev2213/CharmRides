@@ -72,7 +72,7 @@
             android:layout_marginTop="20dp"
             android:alpha="0.5"
             android:fontFamily="@font/montserrat"
-            android:text="2"
+            android:text="maikeeeee"
             android:textColor="@color/primary"
             android:textSize="12sp"
             app:layout_constraintEnd_toStartOf="@+id/imageView14"
@@ -152,7 +152,7 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view"
-            app:srcCompat="@drawable/baseline_calendar_month_24" />
+            app:srcCompat="@drawable/baseline_person_pin_24" />
 
         <ImageView
             android:id="@+id/imageView13"
@@ -165,7 +165,7 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/tvPayDate"
             app:layout_constraintTop_toBottomOf="@+id/view"
-            app:srcCompat="@drawable/baseline_event_seat_24" />
+            app:srcCompat="@drawable/baseline_directions_bus_24" />
 
         <ImageView
             android:id="@+id/imageView14"
