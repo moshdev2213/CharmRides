@@ -82,12 +82,6 @@ class MainActivity : AppCompatActivity() {
         cvProceedToExit.setOnClickListener {
             finish()
         }
-
-        getUserLocation{
-            println("keriyoo me "+it!!.latitude)
-        }
-
-
     }
 
     private fun getAuthEmail(email:String){
@@ -131,17 +125,17 @@ class MainActivity : AppCompatActivity() {
                 val userTrip = response.body()
                 if (response.isSuccessful){
                     if (userTrip!!.items.isNotEmpty()) {
-                       if(userTrip.items[0].endCors=="" && userTrip.items[0].destination==""){
+                        if(userTrip.items[0].endCors.isEmpty() && userTrip.items[0].destination.isEmpty()){
                            //should update the trip for ended credentials
                            updateUserLastTrip(userTrip.items[0])
                        }else{
-                           //should insert a new record for the trip for user
+                            //should insert a new record for the trip for user
                            var locationObj: Location? = null
                            getUserLocation {
                                locationObj = it
-                           }
-                           locationObj?.let {
-                               insertTrip(it,userTrip.items[0])
+                               if (it != null) {
+                                   insertTrip(it,userTrip.items[0])
+                               }
                            }
                        }
                     }else{
@@ -157,7 +151,7 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun updateUserLastTrip(userLastTrip: TripItem){
+    private fun updateUserLastTrips(userLastTrip: TripItem){
         val pbService = PbService()
         val authentication : UserTrip = pbService.getRetrofit().create(UserTrip::class.java)
 
@@ -180,7 +174,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
         var fare = distance.toDouble()*25.50
-
+        println("$destination $distance  $fare")
         val call: Call<TripItem> = authentication.updateUserLastTrip(
             userLastTrip.id,
             TripItem(
@@ -198,6 +192,7 @@ class MainActivity : AppCompatActivity() {
         call.enqueue(object : Callback<TripItem> {
             override fun onResponse(call: Call<TripItem>, response: Response<TripItem>) {
                 val trip = response.body()
+                println(trip)
                 if (response.isSuccessful){
                     //trip Ended popup all the details from the response body
                 }else{
@@ -209,6 +204,61 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
+    private fun updateUserLastTrip(userLastTrip: TripItem) {
+        val pbService = PbService()
+        val authentication: UserTrip = pbService.getRetrofit().create(UserTrip::class.java)
+
+        var locationObj: Location? = null
+        var destination: String? = null
+        var distance: String? = null
+        var fare: Double? = null
+
+        getUserLocation { userLocation ->
+            locationObj = userLocation
+            if (userLocation != null) {
+                getCiyName(userLocation) { cityName ->
+                    destination = cityName.plus_code.compound_code
+
+                    getTripFare(userLastTrip.startCors, "${userLocation.latitude},${userLocation.longitude}") { route ->
+                        if (route != null) {
+                            distance = route.routes[0].legs[0].distance.value
+                            fare = distance!!.toDouble() * 25.50
+                            val call: Call<TripItem> = authentication.updateUserLastTrip(
+                                userLastTrip.id,
+                                TripItem(
+                                    destination ?: "",
+                                    103,
+                                    "${locationObj?.latitude},${locationObj?.longitude}" ?: "",
+                                    fare ?: 0.0,
+                                    "",
+                                    userLastTrip.origin,
+                                    userLastTrip.startCors,
+                                    userLastTrip.userMail
+                                )
+                            )
+
+                            call.enqueue(object : Callback<TripItem> {
+                                override fun onResponse(call: Call<TripItem>, response: Response<TripItem>) {
+                                    val trip = response.body()
+                                    println(trip)
+                                    if (response.isSuccessful) {
+                                        // Trip Ended popup all the details from the response body
+                                        Toast.makeText(this@MainActivity,"Trip Ended",Toast.LENGTH_SHORT).show()
+                                    } else {
+                                        Toast.makeText(this@MainActivity, "Response Error in updateTrip", Toast.LENGTH_SHORT).show()
+                                    }
+                                }
+
+                                override fun onFailure(call: Call<TripItem>, t: Throwable) {
+                                    Toast.makeText(this@MainActivity, "Server Error in updateTrip", Toast.LENGTH_SHORT).show()
+                                }
+                            })
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     private fun insertTrip(userLocation:Location,userLastTrip: TripItem){
         val pbService = PbService()
@@ -216,35 +266,46 @@ class MainActivity : AppCompatActivity() {
         var originCityName = ""
         getCiyName(userLocation) {
             originCityName = it.plus_code.compound_code
-        }
-        println("pkooo meee city Name: $originCityName")
-        val call: Call<TripItem> = authentication.insertTrip(
-            TripItem(
-                "",
-                0,
-                "",
-                0.0,
-                "",
-                originCityName,
-                "${userLocation.latitude},${userLocation.longitude}",
-                userLastTrip.userMail
-            )
-        )
 
-        call.enqueue(object : Callback<TripItem> {
-            override fun onResponse(call: Call<TripItem>, response: Response<TripItem>) {
-                val trip = response.body()
-                if (response.isSuccessful){
-                    //trip has started
-                    Toast.makeText(this@MainActivity,"Trip Started",Toast.LENGTH_SHORT).show()
-                }else{
-                    Toast.makeText(this@MainActivity,"Response Error in insertTrip",Toast.LENGTH_SHORT).show()
+            println("pkooo meee city Name: $originCityName , ${userLocation.longitude}")
+            val call: Call<TripItem> = authentication.insertTrip(
+                TripItem(
+                    "",
+                    0,
+                    "",
+                    0.0,
+                    "",
+                    originCityName,
+                    "${userLocation.latitude},${userLocation.longitude}",
+                    userLastTrip.userMail
+                )
+            )
+
+            call.enqueue(object : Callback<TripItem> {
+                override fun onResponse(call: Call<TripItem>, response: Response<TripItem>) {
+                    val trip = response.body()
+                    println(trip)
+                    if (response.isSuccessful) {
+                        //trip has started
+                        Toast.makeText(this@MainActivity, "Trip Started", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(
+                            this@MainActivity,
+                            "Response Error in insertTrip",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
-            }
-            override fun onFailure(call: Call<TripItem>, t: Throwable) {
-                Toast.makeText(this@MainActivity,"Server Error in insertTrip",Toast.LENGTH_SHORT).show()
-            }
-        })
+
+                override fun onFailure(call: Call<TripItem>, t: Throwable) {
+                    Toast.makeText(
+                        this@MainActivity,
+                        "Server Error in insertTrip",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            })
+        }
     }
 
     private fun getCiyName(userLocation:Location,callback: (CityNameRes) -> Unit){
@@ -257,6 +318,7 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call<CityNameRes>, response: Response<CityNameRes>) {
                 if (response.isSuccessful){
                     val cityName = response.body()
+                    println(cityName)
                     if(cityName !=null){
 
                         callback(cityName)
@@ -270,38 +332,9 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
-
-
-    private fun getDirection(){
-        val retrofitService = RetrofitService()
-        val authentication : GmapsCalculator = retrofitService.getRetrofit().create(GmapsCalculator::class.java)
-
-        val origin = "7.4817644,80.36089819999999"
-        val destination = "6.927044,79.86123599999999"
-
-        val call: Call<Route> = authentication.getRouteDetails(origin,destination)
-        call.enqueue(object : Callback<Route> {
-            override fun onResponse(call: Call<Route>, response: Response<Route>) {
-                if (response.isSuccessful){
-                    val patient = response.body()
-                    if(patient !=null){
-                       println("pkooo meee : "+ patient.routes[0].legs[0].end_address )
-                    }
-                }else{
-                    Toast.makeText(this@MainActivity,"Invalid Credentials",Toast.LENGTH_SHORT).show()
-                }
-            }
-            override fun onFailure(call: Call<Route>, t: Throwable) {
-                Toast.makeText(this@MainActivity,"Failed",Toast.LENGTH_SHORT).show()
-            }
-        })
-    }
     private fun getTripFare(origin:String,destination:String,callback: (Route?) -> Unit) {
         val retrofitService = RetrofitService()
         val authentication: GmapsCalculator = retrofitService.getRetrofit().create(GmapsCalculator::class.java)
-
-//        val origin = "7.4817644,80.36089819999999"
-//        val destination = "6.927044,79.86123599999999"
 
 
         val call: Call<Route> = authentication.getRouteDetails(origin, destination)
@@ -310,7 +343,9 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call<Route>, response: Response<Route>) {
                 if (response.isSuccessful) {
                     val route = response.body()
+                    println(route)
                     callback(route) // Pass the result to the callback
+                    Toast.makeText(this@MainActivity,"Invalid Credentials in trip Fare",Toast.LENGTH_SHORT).show()
                 } else {
                     callback(null) // Handle unsuccessful response
                 }
@@ -329,10 +364,8 @@ class MainActivity : AppCompatActivity() {
                 .addOnSuccessListener { location: Location? ->
                     if (location != null) {
                         userLocation = location
-                        val latitude = location.latitude
-                        val longitude = location.longitude
+
                         // Use latitude and longitude as needed
-                        println("Latitude: $latitude, Longitude: $longitude")
                         callback(userLocation)
                     }
                 }
