@@ -210,7 +210,7 @@ class MainActivity : AppCompatActivity() {
 
         var locationObj: Location? = null
         var destination: String? = null
-        var distance: String? = null
+        var distance: Int? = 0
         var fare: Double? = null
 
         getUserLocation { userLocation ->
@@ -221,17 +221,19 @@ class MainActivity : AppCompatActivity() {
 
                     getTripFare(userLastTrip.startCors, "${userLocation.latitude},${userLocation.longitude}") { route ->
                         if (route != null) {
-                            distance = route.routes[0].legs[0].distance.value
+                            distance = route.routes[0].legs[0].distance.value.toInt()
+                            var endPoint = route.routes[0].legs[0].end_address
+                            var startPoint = route.routes[0].legs[0].start_address
                             fare = distance!!.toDouble() * 25.50
                             val call: Call<TripItem> = authentication.updateUserLastTrip(
                                 userLastTrip.id,
                                 TripItem(
-                                    destination ?: "",
-                                    103,
+                                    endPoint,
+                                    distance!!,
                                     "${locationObj?.latitude},${locationObj?.longitude}" ?: "",
                                     fare ?: 0.0,
                                     "",
-                                    userLastTrip.origin,
+                                    startPoint,
                                     userLastTrip.startCors,
                                     userLastTrip.userMail
                                 )
@@ -345,7 +347,6 @@ class MainActivity : AppCompatActivity() {
                     val route = response.body()
                     println(route)
                     callback(route) // Pass the result to the callback
-                    Toast.makeText(this@MainActivity,"Invalid Credentials in trip Fare",Toast.LENGTH_SHORT).show()
                 } else {
                     callback(null) // Handle unsuccessful response
                 }
