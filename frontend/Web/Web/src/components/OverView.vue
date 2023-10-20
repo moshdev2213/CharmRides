@@ -2,16 +2,16 @@
 <template>
   <div className="body-wrapper ">
     <div className="container-fluid pt-4 pb-0">
-      <div className="col">
-        <div className="col-lg-8 d-flex align-items-strech">
-          <div className="card w-100">
-            <div className="card-body">
-              <div className="d-sm-flex d-block align-items-center justify-content-between mb-9">
-                <div className="mb-3 mb-sm-0">
-                  <h5 className="card-title fw-semibold">Booking Overview</h5>
+      <div class="row">
+        <div class="col-lg-8 d-flex align-items-stretch">
+          <div class="card w-100">
+            <div class="card-body">
+              <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
+                <div class="mb-3 mb-sm-0">
+                  <h5 class="card-title fw-semibold">Trip Overview</h5>
                 </div>
                 <div>
-                  <select className="form-select">
+                  <select class="form-select">
                     <option value="1">March 2023</option>
                     <option value="2">April 2023</option>
                     <option value="3">May 2023</option>
@@ -23,7 +23,57 @@
             </div>
           </div>
         </div>
+        <div class="col-lg-4">
+    <div class="card text-dark bg-white shadow mb-3" style="max-width: 18rem;">
+      <div class="card-header bg-white">
+        <h2 class="text-center">Crowd Overview</h2>
       </div>
+      <div class="card-body">
+        <h5 class="card-title">Bus Details</h5>
+        <p class="card-text">
+          Buses with 60 seats: {{ busCounts.seats60 }}<br>
+          Buses with 55 seats: {{ busCounts.seats55 }}<br>
+          Buses with 25 seats: {{ busCounts.seats25 }}
+        </p>
+        <hr>
+        <h5 class="card-title">Today Bookings: {{ numberOfBookings }}</h5>
+        <hr>
+        <h5 class="card-title">Total Seats: {{ total }}</h5>
+        <h5 class="card-title">Available Seats: {{ total - numberOfBookings }}</h5>
+        <h5 class="card-title">Total Users: {{ totalUsers }}</h5>
+      </div>
+    </div>
+  </div>
+        
+      </div>
+
+      <div class="row">
+        <div class="col-lg-8 d-flex align-items-stretch">
+          <div class="card w-100">
+            <div class="card-body">
+              <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
+                <div class="mb-3 mb-sm-0">
+                  <h5 class="card-title fw-semibold">Booking Overview</h5>
+                </div>
+                <!-- <div>
+                  <select class="form-select">
+                    <option value="1">March 2023</option>
+                    <option value="2">April 2023</option>
+                    <option value="3">May 2023</option>
+                    <option value="4">June 2023</option>
+                  </select>
+                </div> -->
+              </div>
+              <ChartCompo2 />
+            </div>
+          </div>
+        </div>
+
+
+        
+      </div>
+
+
       <div class="row">
         <div class="col-lg-12 d-flex align-items-stretch">
           <div class="card w-100">
@@ -96,17 +146,27 @@ import * as XLSX from "xlsx";
 import Swal from "sweetalert2";
 import ChartCompo from "./ChartCompo.vue";
 import GraphCompo from "./GraphCompo.vue";
+import ChartCompo2 from './chartCompo2.vue';
 
 export default {
   name: "Complaintlist",
   components: {
     ChartCompo,
     GraphCompo,
+    ChartCompo2,
   },
 
   data() {
     return {
       Complaints: [],
+      busCounts: {
+        seats60: 0,
+        seats55: 0,
+        seats25: 0,
+      },
+      numberOfBookings: 0,
+      total:0,
+      totalUsers: 0,
     };
   },
 
@@ -208,6 +268,70 @@ export default {
   created() {
     this.getComplaints();
     setInterval(this.getComplaints, 1000);
+
+    axios
+      .get("https://charm-ride.pockethost.io/api/collections/bus/records")
+      .then((response) => {
+        const buses = response.data.items;
+
+        buses.forEach((bus) => {
+          // Check the bus seat count and increment the corresponding variable
+          if (bus.seat === 60) {
+            this.busCounts.seats60++;
+          } else if (bus.seat === 55) {
+            this.busCounts.seats55++;
+          } else if (bus.seat === 25) {
+            this.busCounts.seats25++;
+          }
+        });
+
+        // Calculate the multiplication results
+        const result60 = this.busCounts.seats60 * 60;
+        const result55 = this.busCounts.seats55 * 55;
+        const result25 = this.busCounts.seats25 * 25;
+
+         this.total = result25+result55+result60;
+
+        // You can access the results in your component as needed
+        console.log("Buses with 60 seats:", this.busCounts.seats60);
+        console.log("Buses with 55 seats:", this.busCounts.seats55);
+        console.log("Buses with 25 seats:", this.busCounts.seats25);
+
+        console.log("Result for 60-seat buses:", result60);
+        console.log("Result for 55-seat buses:", result55);
+        console.log("Result for 25-seat buses:", result25);
+      })
+      .catch((error) => {
+        console.error("Failed to fetch data:", error);
+      });
+
+      const today = new Date();
+    const todayFormatted = today.toISOString().split('T')[0]; // Get today's date in the format "YYYY-MM-DD"
+
+    axios
+      .get("https://charm-ride.pockethost.io/api/collections/booking/records", {
+        params: {
+          created: todayFormatted,
+        },
+      })
+      .then((response) => {
+        this.numberOfBookings = response.data.totalItems; // Get the total number of bookings for today
+      })
+      .catch((error) => {
+        console.error("Failed to fetch data:", error);
+      });
+
+      axios
+      .get("https://charm-ride.pockethost.io/api/collections/users/records")
+      .then((response) => {
+        this.totalUsers = response.data.totalItems; // Get the total number of users from the API response
+      })
+      .catch((error) => {
+        console.error("Failed to fetch data:", error);
+      });
+
+
+
   },
 };
 </script>

@@ -54,6 +54,15 @@
 </a>
 </router-link>
 
+<router-link to="/trip" class="sidebar-item" aria-expanded="false">
+<a class="sidebar-link">
+  <span>
+    <i class="ti ti-article"></i>
+  </span>
+  <span class="hide-menu">Trips</span>
+</a>
+</router-link>
+
 
         
 

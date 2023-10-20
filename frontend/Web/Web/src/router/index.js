@@ -16,6 +16,7 @@ import addIns from '../components/InsAdd.vue';
 import viewB from '../components/viewBus.vue';
 import viewI from '../components/viewInspector.vue';
 import book from '../components/Booking.vue';
+import trip from '../components/Trips.vue';
 
 
 const routes = [
@@ -31,6 +32,7 @@ const routes = [
   { path: '/viewB/:buid', name:'viewB', component: viewB},
   { path: '/viewI/:Id', name:'viewI', component: viewI},
   { path: '/book', component: book },
+  { path: '/trip', component: trip },
 
   
   // { path: '/login', component: login },
