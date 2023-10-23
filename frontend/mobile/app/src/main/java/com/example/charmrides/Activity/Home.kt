@@ -55,4 +55,7 @@ class Home : AppCompatActivity() {
         fragmentTransaction.replace(R.id.frame_layout,fragment)
         fragmentTransaction.commit()
     }
+    private fun testing01(){
+        println("helloooooo")
+    }
 }
